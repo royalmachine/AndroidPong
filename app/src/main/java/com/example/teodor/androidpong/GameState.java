@@ -10,25 +10,25 @@ import android.graphics.Rect;
 public class GameState {
 
     //screen width and height
-    final int _screenWidth = 480;
-    final int _screenHeight = 650;
+    final int _screenWidth = 1080;
+    final int _screenHeight = 1920;
 
     //The ball
-    final int _ballSize = 10;
+    final int _ballSize = 50;
     int _ballX = 100;
     int _ballY = 100;
     int _ballVelocityX = 4;
     int _ballVelocityY = 4;
 
     //The bats
-    final int _batLength = 75;
+    final int _batLength = 300;
     final int topBathLength = 3000;
-    final int _batHeight = 10;
+    final int _batHeight = 40;
     int _topBatX = 0;
     final int _topBatY = 20;
     int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
-    final int _bottomBatY = 640;
-    final int _batSpeed = 3;
+    final int _bottomBatY = 1400;
+    final int _batSpeed = 4;
 
     public GameState()
     {
