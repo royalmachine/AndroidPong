@@ -1,0 +1,99 @@
+package com.example.teodor.androidpong;
+import android.view.KeyEvent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+
+/**
+ * Created by TEODOR on 03-Mar-15.
+ */
+public class GameState {
+
+    //screen width and height
+    final int _screenWidth = 480;
+    final int _screenHeight = 650;
+
+    //The ball
+    final int _ballSize = 10;
+    int _ballX = 100;
+    int _ballY = 100;
+    int _ballVelocityX = 4;
+    int _ballVelocityY = 4;
+
+    //The bats
+    final int _batLength = 75;
+    final int topBathLength = 3000;
+    final int _batHeight = 10;
+    int _topBatX = 0;
+    final int _topBatY = 20;
+    int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
+    final int _bottomBatY = 640;
+    final int _batSpeed = 3;
+
+    public GameState()
+    {
+    }
+
+    //The update method
+    public void update() {
+
+        _ballX += _ballVelocityX;
+        _ballY += _ballVelocityY;
+
+//DEATH!
+        if(_ballY > _screenHeight || _ballY < 0)
+        {_ballX = 100; 	_ballY = 100;}  	//Collisions with the sides
+
+        if(_ballX > _screenWidth || _ballX < 0)
+            _ballVelocityX *= -1; 	//Collisions with the bats
+
+        if(_ballX > _topBatX && _ballX < _topBatX+topBathLength && _ballY < _topBatY)
+            _ballVelocityY *= -1;  //Collisions with the bats
+
+        if(_ballX > _bottomBatX && _ballX < _bottomBatX+_batLength
+                && _ballY > _bottomBatY)
+            _ballVelocityY *= -1;
+    }
+
+
+    public boolean surfaceTouched(float posX, float posY) {
+        _bottomBatX = (int) posX;
+
+        return true;
+    }
+    public boolean keyPressed(int keyCode, KeyEvent msg)
+    {
+        if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) //left
+        {
+           _bottomBatX -= _batSpeed;
+        }
+
+        if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) //right
+        {
+            _bottomBatX += _batSpeed;
+        }
+
+        return true;
+    }
+
+    //the draw method
+    public void draw(Canvas canvas, Paint paint) {
+
+//Clear the screen
+        canvas.drawRGB(20, 20, 20);
+
+//set the colour
+        paint.setARGB(200, 0, 200, 0);
+
+//draw the ball
+        canvas.drawRect(new Rect(_ballX,_ballY,_ballX + _ballSize,_ballY + _ballSize),
+                paint);
+
+//draw the bats
+        canvas.drawRect(new Rect(_topBatX, _topBatY, _topBatX + topBathLength,
+                _topBatY + _batHeight), paint); //top bat
+        canvas.drawRect(new Rect(_bottomBatX, _bottomBatY, _bottomBatX + _batLength,
+                _bottomBatY + _batHeight), paint); //bottom bat
+
+    }
+}
