@@ -28,10 +28,7 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            _x = event.getX();
-            _y = event.getY();
-        }
+
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
             final float xdiff = (_x - event.getX());
             final float ydiff = (_y - event.getY());

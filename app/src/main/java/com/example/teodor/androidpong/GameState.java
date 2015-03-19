@@ -10,15 +10,15 @@ import android.graphics.Rect;
 public class GameState {
 
     //screen width and height
-    final int _screenWidth = 1080;
-    final int _screenHeight = 1920;
+    final int _screenWidth = 1060;
+    final int _screenHeight = 1800;
 
     //The ball
     final int _ballSize = 50;
     int _ballX = 100;
     int _ballY = 100;
-    int _ballVelocityX = 4;
-    int _ballVelocityY = 4;
+    int _ballVelocityX = 5;
+    int _ballVelocityY = 5;
 
     //The bats
     final int _batLength = 300;
@@ -61,21 +61,6 @@ public class GameState {
 
         return true;
     }
-    public boolean keyPressed(int keyCode, KeyEvent msg)
-    {
-        if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) //left
-        {
-           _bottomBatX -= _batSpeed;
-        }
-
-        if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) //right
-        {
-            _bottomBatX += _batSpeed;
-        }
-
-        return true;
-    }
-
     //the draw method
     public void draw(Canvas canvas, Paint paint) {
 
