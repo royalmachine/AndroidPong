@@ -19,7 +19,7 @@ public class GameState {
     int _ballY = 100;
     int _ballVelocityX = 5;
     int _ballVelocityY = 5;
-
+//
     //The bats
     final int _batLength = 300;
     final int topBathLength = 3000;
