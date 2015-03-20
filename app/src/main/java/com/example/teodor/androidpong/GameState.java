@@ -17,8 +17,8 @@ public class GameState {
     final int _ballSize = 50;
     int _ballX = 100;
     int _ballY = 100;
-    int _ballVelocityX = 5;
-    int _ballVelocityY = 5;
+    int _ballVelocityX = 3;
+    int _ballVelocityY = 3;
 //
     //The bats
     final int _batLength = 300;
@@ -56,11 +56,28 @@ public class GameState {
     }
 
 
+
     public boolean surfaceTouched(float posX, float posY) {
         _bottomBatX = (int) posX;
 
         return true;
     }
+
+    public boolean brainActivity(int keyCode, KeyEvent msg)
+    {
+        if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) //left
+        {
+            _bottomBatX -= _batSpeed;
+        }
+
+        if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) //right
+        {
+            _bottomBatX += _batSpeed;
+        }
+
+        return true;
+    }
+
     //the draw method
     public void draw(Canvas canvas, Paint paint) {
 
