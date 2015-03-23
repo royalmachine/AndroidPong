@@ -1,8 +1,11 @@
 package com.example.teodor.androidpong;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+
+import com.neurosky.thinkgear.TGDevice;
 
 /**
  * Created by TEODOR on 03-Mar-15.
@@ -28,7 +31,7 @@ public class GameState {
     final int _topBatY = 20;
     int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
     final int _bottomBatY = 1400;
-    final int _batSpeed = 4;
+    final int _batSpeed = 100;
 
     public GameState()
     {
@@ -63,16 +66,17 @@ public class GameState {
         return true;
     }
 
-    public boolean brainActivity(int keyCode, KeyEvent msg)
+    public boolean brainActivity(Message msg)
     {
-        if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) //left
+        if(msg.what == TGDevice.MSG_ATTENTION) //left
         {
-            _bottomBatX -= _batSpeed;
+            _bottomBatX -= _batSpeed * msg.arg1;
         }
 
-        if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) //right
+        else
+        if(msg.what ==TGDevice.MSG_MEDITATION ) //right
         {
-            _bottomBatX += _batSpeed;
+            _bottomBatX += _batSpeed * msg.arg1;
         }
 
         return true;

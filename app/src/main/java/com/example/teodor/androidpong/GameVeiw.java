@@ -2,18 +2,22 @@ package com.example.teodor.androidpong;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.neurosky.thinkgear.*;
+import android.bluetooth.BluetoothAdapter;
+
 /**
  * Created by TEODOR on 03-Mar-15.
  */
-class GameView extends SurfaceView  implements SurfaceHolder.Callback
-{
+class GameView extends SurfaceView  implements SurfaceHolder.Callback {
     private GameThread _thread;
     private float _x = 0;
     private float _y = 0;
+
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -26,16 +30,20 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback
         _thread = new GameThread(holder, context, new Handler());
     }
 
-    @Override
+
+   public boolean brainStuff (Message msg) {
+      return _thread.getGameState().brainActivity(msg);
+   }
+
+
+
+
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            final float xdiff = (_x - event.getX());
-            final float ydiff = (_y - event.getY());
-            _thread.getGameState().surfaceTouched(_x, _y);
-
             _x = event.getX();
             _y = event.getY();
+            _thread.getGameState().surfaceTouched(_x, _y);
         }
         return true;
     }
