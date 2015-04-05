@@ -17,7 +17,7 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback {
     private GameThread _thread;
     private float _x = 0;
     private float _y = 0;
-    private MainActivity my;
+    public MainActivity my;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
