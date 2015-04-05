@@ -18,6 +18,8 @@ import com.neurosky.thinkgear.TGEegPower;
 
 public class MainActivity extends ActionBarActivity {
 
+
+
     BluetoothAdapter btAdapter;
     TGDevice tgDevice;
     final boolean rawEnabled = false;
@@ -25,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         Log.v("BT:", btAdapter.getName());
         if (btAdapter != null) {
@@ -35,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-     public final Handler handler = new Handler() {
+    public final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -89,9 +92,6 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     };
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
