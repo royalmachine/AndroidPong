@@ -17,6 +17,7 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback {
     private GameThread _thread;
     private float _x = 0;
     private float _y = 0;
+    private MainActivity my;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,7 +33,9 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback {
 
 
    public boolean brainStuff (Message msg) {
-      return _thread.getGameState().brainActivity(msg);
+       my.handler.handleMessage(msg);
+     _thread.getGameState().brainActivity(msg);
+       return true;
    }
 
 

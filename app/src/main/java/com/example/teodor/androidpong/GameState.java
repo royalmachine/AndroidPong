@@ -1,6 +1,5 @@
 package com.example.teodor.androidpong;
 import android.os.Message;
-import android.view.KeyEvent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
