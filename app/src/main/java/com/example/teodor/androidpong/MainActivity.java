@@ -18,8 +18,8 @@ import com.neurosky.thinkgear.TGEegPower;
 
 public class MainActivity extends ActionBarActivity {
 
-
-
+    GameThread _thread;
+    GameView gv;
     BluetoothAdapter btAdapter;
     TGDevice tgDevice;
     final boolean rawEnabled = false;
@@ -28,17 +28,17 @@ public class MainActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        /*btAdapter = BluetoothAdapter.getDefaultAdapter();
         Log.v("BT:", btAdapter.getName());
         if (btAdapter != null) {
             tgDevice = new TGDevice(btAdapter, handler);
             tgDevice.connect(true);
             Log.v("Device", "" + tgDevice.getState());
-
-        }
+ 
+        }*/
     }
 
-    public final Handler handler = new Handler() {
+    /*public final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity {
                         case TGDevice.STATE_NOT_PAIRED:
                         default:
                             break;
+ 
                     }
                     break;
                 case TGDevice.MSG_POOR_SIGNAL:
@@ -75,6 +76,7 @@ public class MainActivity extends ActionBarActivity {
                     break;
                 case TGDevice.MSG_BLINK:
 //Log.v("HelloEEG", "Blinks:" + msg.arg1);
+                    gv.brainStuff(msg);
                     break;
                 case TGDevice.MSG_MEDITATION:
                     Log.v("HelloEEG", "Meditation:" + msg.arg1);
@@ -92,6 +94,7 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     };
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
