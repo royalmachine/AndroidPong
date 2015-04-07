@@ -14,20 +14,20 @@ public class GameState {
     final int _screenHeight = 1800;
 
     //The ball
-    final int _ballSize = 50;
-    int _ballX = 100;
-    int _ballY = 100;
+    final int _ballSize = _screenWidth / 20;
+    int _ballX = _screenWidth / 2;
+    int _ballY = _screenHeight / 2;
     int _ballVelocityX = 3;
     int _ballVelocityY = 3;
     //
     //The bats
-    final int _batLength = 300;
-    final int topBathLength = 3000;
-    final int _batHeight = 40;
+    final int _batLength = _screenWidth / 5;
+    final int topBathLength = _screenWidth;
+    final int _batHeight = _screenHeight / 30;
     int _topBatX = 0;
-    final int _topBatY = 20;
+    final int _topBatY = _screenHeight / 50;
     int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
-    final int _bottomBatY = 1400;
+    final int _bottomBatY = _screenHeight - 20;
     final int _batSpeed = 3;
 
     public GameState()
@@ -42,7 +42,7 @@ public class GameState {
 
 //DEATH!
         if(_ballY > _screenHeight || _ballY < 0)
-        {_ballX = 100; 	_ballY = 100;}  	//Collisions with the sides
+        {_ballX = _screenWidth / 2; 	_ballY = _screenHeight / 2;}  	//Collisions with the sides
 
         if(_ballX > _screenWidth || _ballX < 0)
             _ballVelocityX *= -1; 	//Collisions with the bats
@@ -92,7 +92,7 @@ public class GameState {
         canvas.drawRGB(20, 20, 20);
 
 //set the colour
-        paint.setARGB(200, 0, 200, 0);
+        paint.setARGB(255, 0, 200, 255);
 
 //draw the ball
         canvas.drawRect(new Rect(_ballX,_ballY,_ballX + _ballSize,_ballY + _ballSize),
