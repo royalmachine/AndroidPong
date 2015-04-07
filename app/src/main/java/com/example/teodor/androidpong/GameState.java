@@ -1,25 +1,17 @@
 package com.example.teodor.androidpong;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Message;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-
+import android.util.Log;
 
 import com.neurosky.thinkgear.TGDevice;
 
-/**
- * Created by TEODOR on 03-Mar-15.
- */
 public class GameState {
 
     //screen width and height
-    final int _screenWidth = 1000;
-    final int _screenHeight = 1600;
-    GameView gameView;
-    private int hitId = -1;
-    SoundPool _soundPool;
+    final int _screenWidth = 1060;
+    final int _screenHeight = 1800;
 
     //The ball
     final int _ballSize = 50;
@@ -27,7 +19,7 @@ public class GameState {
     int _ballY = 100;
     int _ballVelocityX = 3;
     int _ballVelocityY = 3;
-//
+    //
     //The bats
     final int _batLength = 300;
     final int topBathLength = 3000;
@@ -36,7 +28,7 @@ public class GameState {
     final int _topBatY = 20;
     int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
     final int _bottomBatY = 1400;
-    final int _batSpeed = 100;
+    final int _batSpeed = 3;
 
     public GameState()
     {
@@ -53,11 +45,7 @@ public class GameState {
         {_ballX = 100; 	_ballY = 100;}  	//Collisions with the sides
 
         if(_ballX > _screenWidth || _ballX < 0)
-            _ballVelocityX *= -1; //Collisions with the bats
-        if (hitId != -1) {
-            _soundPool.play(hitId, 1, 1, 0, 0, 1);
-        }
-
+            _ballVelocityX *= -1; 	//Collisions with the bats
 
         if(_ballX > _topBatX && _ballX < _topBatX+topBathLength && _ballY < _topBatY)
             _ballVelocityY *= -1;  //Collisions with the bats
@@ -75,20 +63,26 @@ public class GameState {
         return true;
     }
 
-    public boolean brainActivity(Message msg)
+    public void brainActivity(Message msg)
     {
-        if(msg.what == TGDevice.MSG_ATTENTION) //left
+        Log.v("HelloEEG", msg.arg1 + "Value of thought");
+        if(msg.what == TGDevice.MSG_BLINK) //left
         {
-            _bottomBatX -= _batSpeed * msg.arg1;
+            //if(msg.arg1 > 40)
+
+            _bottomBatX -= _batSpeed * 25;
         }
 
         else
-        if(msg.what ==TGDevice.MSG_MEDITATION ) //right
+        if(msg.what ==TGDevice.MSG_ATTENTION) //right
         {
-            _bottomBatX += _batSpeed * msg.arg1;
+            if(msg.arg1 > 45)
+
+                _bottomBatX += _batSpeed * (msg.arg1 - 35);
+
         }
 
-        return true;
+        //return true;
     }
 
     //the draw method
