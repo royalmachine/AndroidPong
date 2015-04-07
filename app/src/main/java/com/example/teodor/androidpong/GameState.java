@@ -1,8 +1,11 @@
 package com.example.teodor.androidpong;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Message;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+
 
 import com.neurosky.thinkgear.TGDevice;
 
@@ -12,8 +15,11 @@ import com.neurosky.thinkgear.TGDevice;
 public class GameState {
 
     //screen width and height
-    final int _screenWidth = 1060;
-    final int _screenHeight = 1800;
+    final int _screenWidth = 1000;
+    final int _screenHeight = 1600;
+    GameView gameView;
+    private int hitId = -1;
+    SoundPool _soundPool;
 
     //The ball
     final int _ballSize = 50;
@@ -47,7 +53,11 @@ public class GameState {
         {_ballX = 100; 	_ballY = 100;}  	//Collisions with the sides
 
         if(_ballX > _screenWidth || _ballX < 0)
-            _ballVelocityX *= -1; 	//Collisions with the bats
+            _ballVelocityX *= -1; //Collisions with the bats
+        if (hitId != -1) {
+            _soundPool.play(hitId, 1, 1, 0, 0, 1);
+        }
+
 
         if(_ballX > _topBatX && _ballX < _topBatX+topBathLength && _ballY < _topBatY)
             _ballVelocityY *= -1;  //Collisions with the bats

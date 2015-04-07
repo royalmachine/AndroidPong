@@ -17,12 +17,15 @@ public class GameThread extends Thread {
     private SurfaceHolder _surfaceHolder;
     private Paint _paint;
     private GameState _state;
+    private Context context;
+
 
     public GameThread(SurfaceHolder surfaceHolder, Context context, Handler handler)
     {
         _surfaceHolder = surfaceHolder;
         _paint = new Paint();
         _state = new GameState();
+
     }
 
     @Override
