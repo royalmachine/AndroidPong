@@ -45,7 +45,7 @@ class GameView extends SurfaceView  implements SurfaceHolder.Callback {
     }
 
 
-
+//ponana
     public final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
