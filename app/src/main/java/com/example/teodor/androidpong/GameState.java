@@ -3,6 +3,7 @@ import android.os.Message;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.neurosky.thinkgear.TGDevice;
 
@@ -30,7 +31,7 @@ public class GameState {
     final int _topBatY = 20;
     int _bottomBatX = (_screenWidth/2) - (_batLength / 2);
     final int _bottomBatY = 1400;
-    final int _batSpeed = 100;
+    final int _batSpeed = 3;
 
     public GameState()
     {
@@ -65,20 +66,26 @@ public class GameState {
         return true;
     }
 
-    public boolean brainActivity(Message msg)
+    public void brainActivity(Message msg)
     {
-        if(msg.what == TGDevice.MSG_ATTENTION) //left
+        Log.v("HelloEEG", msg.arg1 + "Value of thought");
+        if(msg.what == TGDevice.MSG_BLINK) //left
         {
-            _bottomBatX -= _batSpeed * msg.arg1;
+            //if(msg.arg1 > 40)
+
+            _bottomBatX -= _batSpeed * 25;
         }
 
         else
-        if(msg.what ==TGDevice.MSG_MEDITATION ) //right
+        if(msg.what ==TGDevice.MSG_ATTENTION) //right
         {
-            _bottomBatX += _batSpeed * msg.arg1;
+            if(msg.arg1 > 45)
+
+                _bottomBatX += _batSpeed * (msg.arg1 - 35);
+
         }
 
-        return true;
+        //return true;
     }
 
     //the draw method
